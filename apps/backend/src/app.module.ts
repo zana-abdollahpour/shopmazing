@@ -3,11 +3,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
 
 import { UsersModule } from './users/users.module.js';
+import { IamModule } from './iam/iam.module.js';
 
 @Module({
   controllers: [],
   providers: [],
   imports: [
+    IamModule,
     UsersModule,
     ConfigModule.forRoot(),
     LoggerModule.forRootAsync({
