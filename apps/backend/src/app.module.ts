@@ -4,14 +4,16 @@ import { LoggerModule } from 'nestjs-pino';
 
 import { UsersModule } from './users/users.module.js';
 import { IamModule } from './iam/iam.module.js';
+import { PrismaModule } from '@/src/prisma/prisma.module.js';
 
 @Module({
   controllers: [],
   providers: [],
   imports: [
     IamModule,
+    PrismaModule,
     UsersModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     LoggerModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
