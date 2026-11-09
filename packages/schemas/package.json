@@ -1,0 +1,21 @@
+{
+  "name": "@repo/schemas",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./users": {
+      "types": "./dist/users/index.d.ts",
+      "import": "./dist/users/index.js",
+      "default": "./dist/users/index.js"
+    }
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.2"
+  }
+}
