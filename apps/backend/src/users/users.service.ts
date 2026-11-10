@@ -1,7 +1,7 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import type { CreateUserDto } from '@repo/schemas/users';
 
-import { HashingService } from '@/src/iam/hashing/hashing.abstract.service.js';
+import { HashingService } from '@/src/hashing/hashing.abstract.service.js';
 
 import { PrismaService } from '@/src/prisma/prisma.service.js';
 import { Prisma, User } from '@/src/generated/prisma/client.js';
@@ -40,5 +40,9 @@ export class UsersService {
       }
       throw err;
     }
+  }
+
+  async getUser(filter: Prisma.UserWhereUniqueInput) {
+    return this.prismaService.user.findUniqueOrThrow({ where: filter });
   }
 }

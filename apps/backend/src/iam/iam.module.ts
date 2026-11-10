@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
 
-import { HashingService } from './hashing/hashing.abstract.service.js';
-import { BcryptService } from './hashing/bcrypt.service.js';
+import { UsersModule } from '@/src/users/users.module.js';
+
+import { AuthenticationService } from './authentication/authentication.service.js';
+import { AuthenticationController } from './authentication/authentication.controller.js';
+import { LocalStrategy } from './authentication/strategies/local.strategy.js';
+import { HashingModule } from '@/src/hashing/hashing.module.js';
 
 @Module({
-  providers: [{ provide: HashingService, useClass: BcryptService }],
-  exports: [HashingService],
+  imports: [UsersModule, HashingModule],
+  providers: [AuthenticationService, LocalStrategy],
+  controllers: [AuthenticationController],
+  exports: [],
 })
 export class IamModule {}
