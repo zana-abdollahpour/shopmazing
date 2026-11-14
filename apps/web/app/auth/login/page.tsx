@@ -3,7 +3,7 @@
 import { useFormState } from "react-dom";
 import { Button, Link, Stack, TextField } from "@mui/material";
 
-import NextLinkClient from "@/components/shared/next-link-client";
+import NextLinkClient from "@/common/components/shared/next-link-client";
 import { loginAction } from "@/app/auth/login/login";
 
 export default function LoginPage() {

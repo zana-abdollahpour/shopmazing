@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { Button, Link, Stack, TextField } from "@mui/material";
 
-import NextLinkClient from "@/components/shared/next-link-client";
+import NextLinkClient from "@/common/components/shared/next-link-client";
 import { createUserAction } from "@/app/auth/signup/create-user";
 
 const initialState = { error: "" };
