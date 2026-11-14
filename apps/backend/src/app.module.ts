@@ -5,6 +5,7 @@ import { LoggerModule } from 'nestjs-pino';
 import { UsersModule } from './users/users.module.js';
 import { IamModule } from './iam/iam.module.js';
 import { PrismaModule } from '@/src/prisma/prisma.module.js';
+import { ProductsModule } from './products/products.module.js';
 
 @Module({
   controllers: [],
@@ -29,6 +30,7 @@ import { PrismaModule } from '@/src/prisma/prisma.module.js';
         };
       },
     }),
+    ProductsModule,
   ],
 })
 export class AppModule {}

@@ -10,6 +10,11 @@
       "types": "./dist/users/index.d.ts",
       "import": "./dist/users/index.js",
       "default": "./dist/users/index.js"
+    },
+    "./products": {
+      "types": "./dist/products/index.d.ts",
+      "import": "./dist/products/index.js",
+      "default": "./dist/products/index.js"
     }
   },
   "dependencies": {
