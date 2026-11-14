@@ -1,11 +1,11 @@
 import { NextRequest } from "next/server";
 
-import { authenticated } from "./app/auth/actions/authenticated";
+import { isAuthenticated } from "./app/auth/actions/is-authenticated";
 import { unauthenticatedRoutes } from "@/constants/routes";
 
 export async function proxy(request: NextRequest) {
   if (
-    !(await authenticated()) &&
+    !(await isAuthenticated()) &&
     !unauthenticatedRoutes.some((route) =>
       request.nextUrl.pathname.startsWith(route.path),
     )

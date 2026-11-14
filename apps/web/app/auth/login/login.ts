@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import type { FormResponse } from "@/common/interfaces/form-response";
 import { API_URL } from "@/constants/api";
 import { getErrorMessage } from "@/common/utils/error";
-import { AUTHENTICATION_COOKIE } from "@/app/auth/constants";
+import { AUTHENTICATION_COOKIE } from "@/app/auth/auth.constants";
 
 export async function loginAction(
   _prevState: FormResponse,

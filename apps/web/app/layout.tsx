@@ -4,6 +4,7 @@ import { Container } from "@mui/material";
 import "./globals.css";
 
 import Providers from "@/providers";
+import Header from "@/components/layout/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   description: "The greatest e-market ever",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col">
         <Providers>
+          <Header />
           <Container>{children}</Container>
         </Providers>
       </body>
