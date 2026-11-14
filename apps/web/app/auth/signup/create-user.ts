@@ -2,14 +2,13 @@
 
 import { redirect } from "next/navigation";
 
-import { post } from "@/utils/fetch";
-
-type SignupState = { error: string };
+import { post } from "@/common/utils/fetch";
+import type { FormResponse } from "@/common/interfaces/form-response";
 
 export async function createUserAction(
-  _prevState: SignupState,
+  _prevState: FormResponse,
   formData: FormData,
-): Promise<SignupState> {
+): Promise<FormResponse> {
   const { error } = await post("users", formData);
 
   if (error) {

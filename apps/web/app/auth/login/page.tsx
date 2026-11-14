@@ -1,21 +1,45 @@
+"use client";
+
+import { useFormState } from "react-dom";
 import { Button, Link, Stack, TextField } from "@mui/material";
 
 import NextLinkClient from "@/components/shared/next-link-client";
+import { loginAction } from "@/app/auth/login/login";
 
 export default function LoginPage() {
-  return (
-    <Stack spacing={2} className="w-full max-w-xs">
-      <TextField label="email" variant="outlined" type="email" />
-      <TextField label="password" variant="outlined" type="password" />
-      <Button variant="contained">Login</Button>
+  const [state, formAction] = useFormState(loginAction, { error: "" });
 
-      <Link
-        component={NextLinkClient}
-        href="/auth/signup"
-        className="self-center"
-      >
-        SignUp
-      </Link>
-    </Stack>
+  return (
+    <form className="w-full max-w-xs" action={formAction}>
+      <Stack spacing={2}>
+        <TextField
+          name="email"
+          label="email"
+          variant="outlined"
+          type="email"
+          error={!!state.error}
+          helperText={state.error}
+        />
+        <TextField
+          name="password"
+          label="password"
+          variant="outlined"
+          type="password"
+          error={!!state.error}
+          helperText={state.error}
+        />
+        <Button type="submit" variant="contained">
+          Login
+        </Button>
+
+        <Link
+          component={NextLinkClient}
+          href="/auth/signup"
+          className="self-center"
+        >
+          SignUp
+        </Link>
+      </Stack>
+    </form>
   );
 }
