@@ -8,6 +8,7 @@ import { HashingModule } from '@/src/hashing/hashing.module.js';
 import { AuthenticationService } from './authentication/authentication.service.js';
 import { AuthenticationController } from './authentication/authentication.controller.js';
 import { LocalStrategy } from './authentication/strategies/local.strategy.js';
+import { JwtStrategy } from '@/src/iam/authentication/strategies/jwt.strategy.js';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { LocalStrategy } from './authentication/strategies/local.strategy.js';
     UsersModule,
     HashingModule,
   ],
-  providers: [AuthenticationService, LocalStrategy],
+  providers: [AuthenticationService, LocalStrategy, JwtStrategy],
   controllers: [AuthenticationController],
   exports: [],
 })
