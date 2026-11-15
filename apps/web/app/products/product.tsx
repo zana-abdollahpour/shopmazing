@@ -5,10 +5,7 @@ import { useRouter } from "next/navigation";
 import { Card, CardActionArea, Stack, Typography } from "@mui/material";
 
 import { Product as IProduct } from "./interfaces/product.interface";
-
-const getProductImage = (productId: number) => {
-  return `${process.env.NEXT_PUBLIC_PRODUCT_IMAGE_URL}/${productId}.jpg`;
-};
+import { getProductImage } from "./product-image";
 
 interface ProductProps {
   product: IProduct;
