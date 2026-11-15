@@ -1,9 +1,9 @@
-import { getMe } from "@/app/get-me";
+import Products from "@/app/products/products";
+import CreateProductFab from "@/app/products/create-product/create-product-fab";
 
 export default async function Home() {
-  const me = await getMe();
-
-  console.log(me);
-
-  return <div>Home</div>;
+  <>
+    <Products />
+    <CreateProductFab />
+  </>;
 }
