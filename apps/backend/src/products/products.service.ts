@@ -21,4 +21,8 @@ export class ProductsService {
   async getProducts() {
     return this.prismaService.product.findMany();
   }
+
+  async uploadProductImage(productId: string, file: Buffer) {
+    // TODO: upload to amazon s3
+  }
 }

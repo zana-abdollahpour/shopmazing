@@ -1,4 +1,16 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  FileTypeValidator,
+  Get,
+  MaxFileSizeValidator,
+  Param,
+  ParseFilePipe,
+  Post,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 
 import {
   createProductSchema,
@@ -9,6 +21,7 @@ import { JwtAuthenticationGuard } from '@/src/iam/authentication/guards/jwt-auth
 import { CurrentUser } from '@/src/iam/authentication/decorators/current-user.decorator.js';
 import type { TokenPayload } from '@/src/iam/interfaces/token-payload.interface.js';
 import { ProductsService } from '@/src/products/products.service.js';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('products')
 export class ProductsController {
@@ -21,6 +34,24 @@ export class ProductsController {
     @CurrentUser() user: TokenPayload,
   ) {
     return this.productsService.createProduct(dto, user.userId);
+  }
+
+  @Post(':productId/image')
+  @UseGuards(JwtAuthenticationGuard)
+  @UseInterceptors(FileInterceptor('image'))
+  uploadProductImage(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 500000 }),
+          new FileTypeValidator({ fileType: 'image/jpeg' }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+    @Param('productId') productId: string,
+  ) {
+    return this.productsService.uploadProductImage(productId, file.buffer);
   }
 
   @Get()
