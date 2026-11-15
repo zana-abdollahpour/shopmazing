@@ -1,3 +1,5 @@
+import { join } from 'node:path';
+import { promises as fsPromises } from 'node:fs';
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '@/src/prisma/prisma.service.js';
@@ -19,10 +21,28 @@ export class ProductsService {
   }
 
   async getProducts() {
-    return this.prismaService.product.findMany();
+    const products = await this.prismaService.product.findMany();
+    return Promise.all(
+      products.map(async (product) => ({
+        ...product,
+        imageExists: await this.imageExists(product.id),
+      })),
+    );
   }
 
   async uploadProductImage(productId: string, file: Buffer) {
     // TODO: upload to amazon s3
+  }
+
+  private async imageExists(productId: number) {
+    try {
+      await fsPromises.access(
+        join(__dirname, '..', '..', `public/products/${productId}.jpg`),
+        fsPromises.constants.F_OK,
+      );
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 }
