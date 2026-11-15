@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   experimental: {
     agentFeedback: true,
   },
+  images: {
+    remotePatterns: [{ hostname: "localhost" }],
+  },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
