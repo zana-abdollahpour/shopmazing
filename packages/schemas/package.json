@@ -15,6 +15,11 @@
       "types": "./dist/products/index.d.ts",
       "import": "./dist/products/index.js",
       "default": "./dist/products/index.js"
+    },
+    "./checkout": {
+      "types": "./dist/checkout/index.d.ts",
+      "import": "./dist/checkout/index.js",
+      "default": "./dist/checkout/index.js"
     }
   },
   "dependencies": {

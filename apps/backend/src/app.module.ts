@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module.js';
 import { IamModule } from './iam/iam.module.js';
 import { PrismaModule } from '@/src/prisma/prisma.module.js';
 import { ProductsModule } from './products/products.module.js';
+import { CheckoutModule } from './checkout/checkout.module.js';
 
 @Module({
   controllers: [],
@@ -31,6 +32,7 @@ import { ProductsModule } from './products/products.module.js';
       },
     }),
     ProductsModule,
+    CheckoutModule,
   ],
 })
 export class AppModule {}
