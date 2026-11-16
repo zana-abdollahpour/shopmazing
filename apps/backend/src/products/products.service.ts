@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { promises as fsPromises } from 'node:fs';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '@/src/prisma/prisma.service.js';
 import type { CreateProductDto } from '@repo/schemas/products';
@@ -43,6 +43,19 @@ export class ProductsService {
       return true;
     } catch (err) {
       return false;
+    }
+  }
+
+  async getProduct(productId: number) {
+    try {
+      const row = await this.prismaService.product.findUniqueOrThrow({
+        where: { id: productId },
+      });
+      const imageExists = await this.imageExists(productId);
+
+      return { ...row, imageExists };
+    } catch (error) {
+      throw new NotFoundException(`Product not found with Id ${productId}`);
     }
   }
 }

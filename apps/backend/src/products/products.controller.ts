@@ -59,4 +59,10 @@ export class ProductsController {
   async getProducts() {
     return this.productsService.getProducts();
   }
+
+  @Get(':productId')
+  @UseGuards(JwtAuthenticationGuard)
+  async getProduct(@Param('productId') productId: string) {
+    return this.productsService.getProduct(+productId);
+  }
 }
