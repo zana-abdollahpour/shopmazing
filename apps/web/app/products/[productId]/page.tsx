@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 
 import { getProductImage } from "@/app/products/product-image";
 import { getProduct } from "./get-product";
+import { Checkout } from "@/app/checkout/checkout";
 
 type SingleProductProps = {
   params: Promise<{
@@ -36,7 +37,8 @@ export default async function SingleProductPage({
           <Typography variant="h2">{product.name}</Typography>
           <Typography>{product.description}</Typography>
           <Typography variant="h4">${product.price}</Typography>
-          {/* TODO: add checkout */}
+
+          <Checkout productId={product.id} />
         </Stack>
       </Grid>
     </Grid>
