@@ -7,9 +7,10 @@ import { IamModule } from './iam/iam.module.js';
 import { PrismaModule } from '@/src/prisma/prisma.module.js';
 import { ProductsModule } from './products/products.module.js';
 import { CheckoutModule } from './checkout/checkout.module.js';
+import { HealthController } from './health.controller.js';
 
 @Module({
-  controllers: [],
+  controllers: [HealthController],
   providers: [],
   imports: [
     IamModule,
