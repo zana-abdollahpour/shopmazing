@@ -8,6 +8,7 @@ import { PrismaModule } from '@/src/prisma/prisma.module.js';
 import { ProductsModule } from './products/products.module.js';
 import { CheckoutModule } from './checkout/checkout.module.js';
 import { HealthController } from './health.controller.js';
+import { StorageModule } from './storage/storage.module.js';
 
 @Module({
   controllers: [HealthController],
@@ -34,6 +35,7 @@ import { HealthController } from './health.controller.js';
     }),
     ProductsModule,
     CheckoutModule,
+    StorageModule,
   ],
 })
 export class AppModule {}

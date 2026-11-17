@@ -8,7 +8,9 @@ import type {
   ProductUpdateInput,
 } from '@/src/generated/prisma/models.js';
 
+import { StorageService } from '@/src/storage/storage-provider/storage.service.abstract.js';
 import type { CreateProductDto } from '@repo/schemas/products';
+
 import { ProductsGateway } from './products.gateway.js';
 
 @Injectable()
@@ -16,6 +18,7 @@ export class ProductsService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly productsGateway: ProductsGateway,
+    private readonly storageService: StorageService,
   ) {}
 
   async createProduct(dto: CreateProductDto, userId: number) {
@@ -56,17 +59,14 @@ export class ProductsService {
     );
   }
 
-  async uploadProductImage(productId: string, file: Buffer) {
-    // TODO: upload to amazon s3
+  async uploadProductImage(productId: number, file: Buffer) {
+    this.storageService.upload(productId, file);
   }
 
   private async imageExists(productId: number) {
     try {
-      await fsPromises.access(
-        join(__dirname, '..', '..', `public/products/${productId}.jpg`),
-        fsPromises.constants.F_OK,
-      );
-      return true;
+      const exists = await this.storageService.fileExists(`${productId}.jpg`);
+      return exists;
     } catch (err) {
       return false;
     }

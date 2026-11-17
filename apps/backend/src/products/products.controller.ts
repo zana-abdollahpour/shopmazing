@@ -52,7 +52,7 @@ export class ProductsController {
     file: Express.Multer.File,
     @Param('productId') productId: string,
   ) {
-    return this.productsService.uploadProductImage(productId, file.buffer);
+    return this.productsService.uploadProductImage(+productId, file.buffer);
   }
 
   @Get()
