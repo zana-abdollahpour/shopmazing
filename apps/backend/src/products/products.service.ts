@@ -3,18 +3,23 @@ import { promises as fsPromises } from 'node:fs';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '@/src/prisma/prisma.service.js';
-import type { CreateProductDto } from '@repo/schemas/products';
 import type {
   ProductFindManyArgs,
   ProductUpdateInput,
 } from '@/src/generated/prisma/models.js';
 
+import type { CreateProductDto } from '@repo/schemas/products';
+import { ProductsGateway } from './products.gateway.js';
+
 @Injectable()
 export class ProductsService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly productsGateway: ProductsGateway,
+  ) {}
 
   async createProduct(dto: CreateProductDto, userId: number) {
-    return this.prismaService.product.create({
+    const product = await this.prismaService.product.create({
       data: {
         name: dto.name,
         description: dto.description,
@@ -22,6 +27,9 @@ export class ProductsService {
         userId: userId,
       },
     });
+
+    this.productsGateway.handleProductUpdated();
+    return product;
   }
 
   async update(productId: number, data: ProductUpdateInput) {
@@ -29,6 +37,8 @@ export class ProductsService {
       where: { id: productId },
       data,
     });
+
+    this.productsGateway.handleProductUpdated();
   }
 
   async getProducts(status?: string) {

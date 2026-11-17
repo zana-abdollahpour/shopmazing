@@ -30,7 +30,9 @@
     "@nestjs/jwt": "^12.0.4",
     "@nestjs/passport": "^12.0.1",
     "@nestjs/platform-express": "^12.0.1",
+    "@nestjs/platform-socket.io": "^12.5.0",
     "@nestjs/serve-static": "^12.1.1",
+    "@nestjs/websockets": "^12.5.0",
     "@prisma/adapter-pg": "^7.10.1",
     "@prisma/client": "^7.10.1",
     "@repo/schemas": "workspace:*",
@@ -44,6 +46,7 @@
     "pino-http": "^11.0.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "socket.io": "^4.8.4",
     "stripe": "^23.1.0",
     "zod": "^4.6.7"
   },
