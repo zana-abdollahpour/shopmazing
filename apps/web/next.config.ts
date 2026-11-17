@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     agentFeedback: true,
   },
   images: {
-    remotePatterns: [{ hostname: "localhost" }],
+    remotePatterns: [{ hostname: process.env.PRODUCT_IMAGE_HOST! }],
   },
   cacheComponents: true,
   partialPrefetching: true,
