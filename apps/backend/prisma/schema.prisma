@@ -21,10 +21,11 @@ model User {
 }
 
 model Product {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   description String
   price       Float
+  sold        Boolean @default(false)
 
   user   User @relation(fields: [userId], references: [id])
   userId Int

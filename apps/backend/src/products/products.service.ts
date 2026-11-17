@@ -4,6 +4,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '@/src/prisma/prisma.service.js';
 import type { CreateProductDto } from '@repo/schemas/products';
+import type { ProductUpdateInput } from '@/src/generated/prisma/models.js';
 
 @Injectable()
 export class ProductsService {
@@ -17,6 +18,13 @@ export class ProductsService {
         price: dto.price,
         userId: userId,
       },
+    });
+  }
+
+  async update(productId: number, data: ProductUpdateInput) {
+    await this.prismaService.product.update({
+      where: { id: productId },
+      data,
     });
   }
 
