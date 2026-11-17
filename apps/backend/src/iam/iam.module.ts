@@ -25,6 +25,6 @@ import { JwtStrategy } from '@/src/iam/authentication/strategies/jwt.strategy.js
   ],
   providers: [AuthenticationService, LocalStrategy, JwtStrategy],
   controllers: [AuthenticationController],
-  exports: [],
+  exports: [AuthenticationService],
 })
 export class IamModule {}

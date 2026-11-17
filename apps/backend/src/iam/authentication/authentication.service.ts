@@ -55,4 +55,8 @@ export class AuthenticationService {
       throw new UnauthorizedException('Email or password is incorrect');
     }
   }
+
+  async verifyToken(token: string) {
+    return await this.jwtService.verifyAsync(token);
+  }
 }
