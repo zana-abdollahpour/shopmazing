@@ -4,7 +4,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '@/src/prisma/prisma.service.js';
 import type { CreateProductDto } from '@repo/schemas/products';
-import type { ProductUpdateInput } from '@/src/generated/prisma/models.js';
+import type {
+  ProductFindManyArgs,
+  ProductUpdateInput,
+} from '@/src/generated/prisma/models.js';
 
 @Injectable()
 export class ProductsService {
@@ -28,8 +31,13 @@ export class ProductsService {
     });
   }
 
-  async getProducts() {
-    const products = await this.prismaService.product.findMany();
+  async getProducts(status?: string) {
+    const findArgs: ProductFindManyArgs = {};
+    if (status === 'available') {
+      findArgs.where = { sold: false };
+    }
+
+    const products = await this.prismaService.product.findMany(findArgs);
     return Promise.all(
       products.map(async (product) => ({
         ...product,
